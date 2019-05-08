@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zn-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Mac 上mongodb和Robo 3T的使用 前言:之前学Python爬虫的时候学了mongodb的终端语言,笔记丢失,也因为考研很久没敲代码,写这篇来学习一下每一次运次Robo 3T的时候记得在终端运行mongod  终端启动和停止mongodb我的路径是:/usr/local/var/mongodb/bin,mongod要在管理员的身份下运行 12sudo sumongod  如果没有进行配">
+<meta name="keywords" content="-mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pymongo的使用">
+<meta property="og:url" content="http://yoursite.com/2019/05/08/pymongo的使用/index.html">
+<meta property="og:site_name" content="Sumurai">
+<meta property="og:description" content="Mac 上mongodb和Robo 3T的使用 前言:之前学Python爬虫的时候学了mongodb的终端语言,笔记丢失,也因为考研很久没敲代码,写这篇来学习一下每一次运次Robo 3T的时候记得在终端运行mongod  终端启动和停止mongodb我的路径是:/usr/local/var/mongodb/bin,mongod要在管理员的身份下运行 12sudo sumongod  如果没有进行配">
+<meta property="og:locale" content="zn-Hans">
+<meta property="og:updated_time" content="2019-05-08T12:22:52.337Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pymongo的使用">
+<meta name="twitter:description" content="Mac 上mongodb和Robo 3T的使用 前言:之前学Python爬虫的时候学了mongodb的终端语言,笔记丢失,也因为考研很久没敲代码,写这篇来学习一下每一次运次Robo 3T的时候记得在终端运行mongod  终端启动和停止mongodb我的路径是:/usr/local/var/mongodb/bin,mongod要在管理员的身份下运行 12sudo sumongod  如果没有进行配">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/08/pymongo的使用/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>pymongo的使用 | Sumurai</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zn-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sumurai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">头铁就完事儿</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/pymongo的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="三金酱">
+      <meta itemprop="description" content="Just For Study">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sumurai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pymongo的使用
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-08 20:10:21 / Modified: 20:22:52" itemprop="dateCreated datePublished" datetime="2019-05-08T20:10:21+08:00">2019-05-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/08/pymongo的使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/08/pymongo的使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mac-上mongodb和Robo-3T的使用"><a href="#Mac-上mongodb和Robo-3T的使用" class="headerlink" title="Mac 上mongodb和Robo 3T的使用"></a>Mac 上mongodb和Robo 3T的使用</h1><blockquote>
+<p>前言:之前学Python爬虫的时候学了mongodb的终端语言,笔记丢失,也因为考研很久没敲代码,写这篇来学习一下<br><strong>每一次运次Robo 3T的时候记得在终端运行mongod</strong></p>
+</blockquote>
+<h2 id="终端启动和停止mongodb"><a href="#终端启动和停止mongodb" class="headerlink" title="终端启动和停止mongodb"></a>终端启动和停止mongodb</h2><p>我的路径是:/usr/local/var/mongodb/bin,<strong>mongod要在管理员的身份下运行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line">mongod</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果没有进行配置,需要在mongodb所在文件夹下,具体配置可以百度</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod 开启端口</span><br></pre></td></tr></table></figure>
+<p><strong>在Mac终端需要先运行mongod,然后再另一个窗口运行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mongo</span><br></pre></td></tr></table></figure>
+<p>具体操作在mongodb的官方文档中可以查阅</p>
+<p><a href="http://www.mongodb.org.cn/tutorial" target="_blank" rel="noopener">http://www.mongodb.org.cn/tutorial</a></p>
+<h2 id="pymongo的基本使用"><a href="#pymongo的基本使用" class="headerlink" title="pymongo的基本使用"></a>pymongo的基本使用</h2><h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"> </span><br><span class="line">import pymongo</span><br><span class="line"> </span><br><span class="line">myclient = pymongo.MongoClient(&quot;mongodb://localhost:27017/&quot;)</span><br><span class="line">mydb = myclient[&quot;runoobdb&quot;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 判断数据库是否存在</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>#!/usr/bin/python3</p>
+<p>import pymongo</p>
+<p>myclient = pymongo.MongoClient(‘mongodb://localhost:27017/‘)</p>
+<p>dblist = myclient.list_database_names()</p>
+<h1 id="dblist-myclient-database-names"><a href="#dblist-myclient-database-names" class="headerlink" title="dblist = myclient.database_names()"></a>dblist = myclient.database_names()</h1><p>if “runoobdb” in dblist:<br>  print(“数据库已存在！”)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 这里有个注意的点:**要在数据库中插入数据数据库才会真实存在**</span><br><span class="line"></span><br><span class="line">### 插入多个数据</span><br></pre></td></tr></table></figure></p>
+<p>import pymongo</p>
+<p>myclient = pymongo.MongoClient(“mongodb://localhost:27017”)<br>mydb = myclient[“sanjin”]<br>mycol = mydb[“colone”]</p>
+<p>#这里也可以指定id,在每个集合前面加一个”_id的字段””_id”:<br>mydict = [{“name”:”xixi”,”age”:18,”sex”:”male”},<br>          {“name”:”zz”,”age”:18,”sex”:”male”},<br>          {“name”:”xx”,”age”:18,”sex”:”male”},<br>          {“name”:”ll”,”age”:18,”sex”:”male”}]</p>
+<p>x = mycol.insert_many(mydict)<br>print(x.inserted_ids)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt; 插入一个数据是用inser_one()</span><br><span class="line"></span><br><span class="line">## 查询语句</span><br><span class="line"></span><br><span class="line">我们可以使用 **find_one()** 方法来查询集合中的一条数据。</span><br><span class="line"></span><br><span class="line">#### 查询一条数据</span><br></pre></td></tr></table></figure></p>
+<p>import pymongo</p>
+<p>myclient = pymongo.MongoClient(“mongodb://localhost:27017”)<br>mydb = myclient[“sanjin”]<br>mycol = mydb[“colone”]</p>
+<p>x = mycol.find_one()<br>print(x)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>{‘_id’: ObjectId(‘5c3861ac5110ed5ab48e2871’), ‘name’: ‘haha’, ‘age’: 18, ‘sex’: ‘male’}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 查询所有数据</span><br><span class="line"></span><br><span class="line">返回指定条数,在find()后添加.limit(nums)</span><br><span class="line"></span><br><span class="line">```myresult = mycol.find().limit(3)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(&quot;mongodb://localhost:27017&quot;)</span><br><span class="line">mydb = myclient[&quot;sanjin&quot;]</span><br><span class="line">mycol = mydb[&quot;colone&quot;]</span><br><span class="line"></span><br><span class="line">#find() 方法可以查询集合中的所有数据，类似 SQL 中的 SELECT * 操作。</span><br><span class="line">x = mycol.find()</span><br><span class="line">for item in x:</span><br><span class="line">    print(item)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">出来的部分数据为:</span><br><span class="line">&#123;&apos;name&apos;: &apos;haha&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xixi&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;zz&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xx&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;ll&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xixi&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;zz&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xx&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;ll&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xixi&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;zz&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xx&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;ll&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xixi&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;zz&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xx&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;ll&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;xixi&apos;, &apos;sex&apos;: &apos;male&apos;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查询指定字段数据"><a href="#查询指定字段数据" class="headerlink" title="查询指定字段数据"></a>查询指定字段数据</h3><p>我们可以使用 find() 方法来查询指定字段的数据，将要返回的字段对应值设置为 1。</p>
+<p><strong>字段设置为1则返回,为0则不返回字段</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"> </span><br><span class="line">import pymongo</span><br><span class="line"> </span><br><span class="line">myclient = pymongo.MongoClient(&quot;mongodb://localhost:27017/&quot;)</span><br><span class="line">mydb = myclient[&quot;runoobdb&quot;]</span><br><span class="line">mycol = mydb[&quot;sites&quot;]</span><br><span class="line"> </span><br><span class="line">for x in mycol.find(&#123;&#125;,&#123; &quot;_id&quot;: 0, &quot;name&quot;: 1, &quot;alexa&quot;: 1 &#125;):</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>除了 _id 你不能在一个对象中同时指定 0 和 1，如果你设置了一个字段为 0，则其他都为 1，反之亦然。</li>
+</ul>
+<h4 id="选取字段查询"><a href="#选取字段查询" class="headerlink" title="选取字段查询"></a>选取字段查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line"> </span><br><span class="line">myclient = pymongo.MongoClient(&quot;mongodb://localhost:27017&quot;)</span><br><span class="line">mydb = myclient[&quot;sanjin&quot;]</span><br><span class="line">mycol = mydb[&quot;colone&quot;]</span><br><span class="line"> </span><br><span class="line">myquery = &#123; &quot;name&quot;: &quot;haha&quot; &#125;</span><br><span class="line"> </span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"> </span><br><span class="line">for x in mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+<h4 id="高级查询"><a href="#高级查询" class="headerlink" title="高级查询"></a>高级查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line"> </span><br><span class="line">myclient = pymongo.MongoClient(&quot;mongodb://localhost:27017&quot;)</span><br><span class="line">mydb = myclient[&quot;sanjin&quot;]</span><br><span class="line">mycol = mydb[&quot;colone&quot;]</span><br><span class="line"> </span><br><span class="line">myquery = &#123; &quot;name&quot;: &#123;&quot;$gt&quot;:&quot;z&quot;&#125; &#125;</span><br><span class="line"> </span><br><span class="line">mydoc = mycol.find(myquery)</span><br><span class="line"> </span><br><span class="line">for x in mydoc:</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>读取 name 字段中第一个字母 ASCII 值大于 “z” 的数据，大于的修饰符条件为 <strong>{“$gt”: “H”}</strong></li>
+<li><p>也可以用正则表达式:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 多条修改</span><br><span class="line"></span><br><span class="line">```Python</span><br><span class="line">import pymongo</span><br><span class="line"> </span><br><span class="line">myclient = pymongo.MongoClient(&quot;mongodb://localhost:27017/&quot;)</span><br><span class="line">mydb = myclient[&quot;sanjin&quot;]</span><br><span class="line">mycol = mydb[&quot;colone&quot;]</span><br><span class="line"> </span><br><span class="line">#下面的是会修改所有name为zz的,将age字段改成20</span><br><span class="line">myquery = &#123; &quot;name&quot;: &quot;zz&quot; &#125;</span><br><span class="line">newvalues = &#123; &quot;$set&quot;: &#123; &quot;age&quot;: &quot;20&quot; &#125; &#125;</span><br><span class="line"> </span><br><span class="line">mycol.update_many(myquery, newvalues)</span><br><span class="line"> </span><br><span class="line"># 输出修改后的  &quot;sites&quot;  集合</span><br><span class="line">for x in mycol.find():</span><br><span class="line">  print(x)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p><strong>update_one()</strong> 方法只能修匹配到的第一条记录，如果要修改所有匹配到的记录，可以使用 <strong>update_many()</strong>。</p>
+</li>
+</ul>
+<h3 id="根据字段排序"><a href="#根据字段排序" class="headerlink" title="根据字段排序"></a>根据字段排序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(<span class="string">"mongodb://localhost:27017/"</span>)</span><br><span class="line">mydb = myclient[<span class="string">"sanjin"</span>]</span><br><span class="line">mycol = mydb[<span class="string">"colone"</span>]</span><br><span class="line"></span><br><span class="line">mydoc = mycol.find().sort(<span class="string">"age"</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> mydoc:</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>是根据age字段进行升序排序</li>
+<li><p>可以根据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 删除数据</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">import pymongo</span><br><span class="line"></span><br><span class="line">myclient = pymongo.MongoClient(&quot;mongodb://localhost:27017&quot;)</span><br><span class="line">mydb = myclient[&quot;sanjin&quot;]</span><br><span class="line">mycol = mydb[&quot;colone&quot;]</span><br><span class="line"></span><br><span class="line">myquery = &#123;&quot;name&quot;:&quot;xixi&quot;&#125;</span><br><span class="line">mycol.delete_many(myquery)</span><br><span class="line"></span><br><span class="line">for x in mycol.find():</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>同样,跟上面一样,delete_one()就是删除所查找到得第一条数据</p>
+</li>
+<li>myquery中也可以放正则表达式<code>myquery = { &quot;name&quot;: {&quot;$regex&quot;: &quot;^F&quot;} }</code></li>
+<li>可是利用<code>x = mycol.delete_many({})</code>删除collection中所有的元素({这里面的元素})</li>
+<li>删除集合是直接用collectionname.drop()来进行集合的删除</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb/" rel="tag"># -mongodb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/29/Future-Plan/" rel="next" title="Future Plan">
+                <i class="fa fa-chevron-left"></i> Future Plan
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/08/Mongodb基本使用/" rel="prev" title="Mongodb的基本使用">
+                Mongodb的基本使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">三金酱</p>
+              <div class="site-description motion-element" itemprop="description">Just For Study</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-上mongodb和Robo-3T的使用"><span class="nav-number">1.</span> <span class="nav-text">Mac 上mongodb和Robo 3T的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#终端启动和停止mongodb"><span class="nav-number">1.1.</span> <span class="nav-text">终端启动和停止mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pymongo的基本使用"><span class="nav-number">1.2.</span> <span class="nav-text">pymongo的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dblist-myclient-database-names"><span class="nav-number">2.</span> <span class="nav-text">dblist = myclient.database_names()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询指定字段数据"><span class="nav-number">2.0.1.</span> <span class="nav-text">查询指定字段数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#选取字段查询"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">选取字段查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高级查询"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">高级查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据字段排序"><span class="nav-number">2.0.2.</span> <span class="nav-text">根据字段排序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">三金酱</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2019/05/08/pymongo的使用/";
+    this.page.identifier = "2019/05/08/pymongo的使用/";
+    this.page.title = 'pymongo的使用';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

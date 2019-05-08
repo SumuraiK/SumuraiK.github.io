@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zn-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 **我的mongodb在1234**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo*** 如果想要关掉mongod的话可以直接按Q离开,也可以```top```查看相关的进程,然后">
+<meta name="keywords" content="-mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mongodb的基本使用">
+<meta property="og:url" content="http://yoursite.com/2019/05/08/Mongodb基本使用/index.html">
+<meta property="og:site_name" content="Sumurai">
+<meta property="og:description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 **我的mongodb在1234**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo*** 如果想要关掉mongod的话可以直接按Q离开,也可以```top```查看相关的进程,然后">
+<meta property="og:locale" content="zn-Hans">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2013/10/Figure-1-Mapping-Table-to-Collection-1.png">
+<meta property="og:updated_time" content="2019-05-08T12:11:16.648Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mongodb的基本使用">
+<meta name="twitter:description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 **我的mongodb在1234**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo*** 如果想要关掉mongod的话可以直接按Q离开,也可以```top```查看相关的进程,然后">
+<meta name="twitter:image" content="http://www.runoob.com/wp-content/uploads/2013/10/Figure-1-Mapping-Table-to-Collection-1.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/05/08/Mongodb基本使用/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Mongodb的基本使用 | Sumurai</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zn-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sumurai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">头铁就完事儿</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/Mongodb基本使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="三金酱">
+      <meta itemprop="description" content="Just For Study">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sumurai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mongodb的基本使用
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-08 20:10:21 / Modified: 20:11:16" itemprop="dateCreated datePublished" datetime="2019-05-08T20:10:21+08:00">2019-05-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/08/Mongodb基本使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/08/Mongodb基本使用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mongodb的基本使用"><a href="#Mongodb的基本使用" class="headerlink" title="Mongodb的基本使用"></a>Mongodb的基本使用</h1><p>主要的详解在<a href="http://www.runoob.com/mongodb/mongodb-dropdatabase.html" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-dropdatabase.html</a></p>
+<p>本笔记就是记最基本的使用</p>
+<p>**我的mongodb在<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo**</span><br><span class="line"></span><br><span class="line">* 如果想要关掉mongod的话可以直接按Q离开,也可以```top```查看相关的进程,然后```kill pid</span><br></pre></td></tr></table></figure></p>
+<h2 id="MongoDB的基本理解"><a href="#MongoDB的基本理解" class="headerlink" title="MongoDB的基本理解"></a>MongoDB的基本理解</h2><table>
+<thead>
+<tr>
+<th>SQL术语/概念</th>
+<th>MongoDB术语/概念</th>
+<th>解释/说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>database</td>
+<td>database</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>table</td>
+<td>collection</td>
+<td>数据库表/集合</td>
+</tr>
+<tr>
+<td>row</td>
+<td>document</td>
+<td>数据记录行/文档</td>
+</tr>
+<tr>
+<td>column</td>
+<td>field</td>
+<td>数据字段/域</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index</td>
+<td>索引</td>
+</tr>
+<tr>
+<td>table joins</td>
+<td></td>
+<td>表连接,MongoDB不支持</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>primary key</td>
+<td>主键,MongoDB自动将_id字段设置为主键</td>
+</tr>
+</tbody>
+</table>
+<p>通过下图实例，我们也可以更直观的了解Mongo中的一些概念：</p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2013/10/Figure-1-Mapping-Table-to-Collection-1.png" alt="img"></p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>一个MongoDB可以有多个数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; db</span><br><span class="line">text</span><br><span class="line">&gt; show dbs</span><br><span class="line">admin   0.000GB</span><br><span class="line">config  0.000GB</span><br><span class="line">local   0.000GB</span><br></pre></td></tr></table></figure>
+<p>用<figure class="highlight plain"><figcaption><span>dbname```来使用指定的数据库</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**数据库名要全部小写哇**</span><br><span class="line"></span><br><span class="line">### 文档</span><br><span class="line"></span><br><span class="line">文档是一组键值(key-value)对(即BSON)。MongoDB 的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别，也是 MongoDB 非常突出的特点。</span><br><span class="line"></span><br><span class="line">| RDBMS  | MongoDB                           |</span><br><span class="line">| ------ | --------------------------------- |</span><br><span class="line">| 数据库 | 数据库                            |</span><br><span class="line">| 表格   | 集合                              |</span><br><span class="line">| 行     | 文档                              |</span><br><span class="line">| 列     | 字段                              |</span><br><span class="line">| 表联合 | 嵌入文档                          |</span><br><span class="line">| 主键   | 主键 (MongoDB 提供了 key 为 _id ) |</span><br><span class="line"></span><br><span class="line">集合就是mongodb的文档组,集合里面存的是键值对</span><br><span class="line"></span><br><span class="line">## Mongodb 创建数据库</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>use tablename<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 如果数据库存在则转移到当前数据库,如果不存在那么就自动新建一个数据库</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>show dbs<br>admin   0.000GB<br>config  0.000GB<br>local   0.000GB<br>上面三个数据库是系统自带的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 会发现刚才新建的数据库不在里面,要插入数据会在里面显示</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>db.text.insert({“name”:”珍珍”,”age”:”18”,”sex”:”female”})<br>WriteResult({ “nInserted” : 1 })<br>show dbs<br>admin   0.000GB<br>config  0.000GB<br>local   0.000GB<br>text    0.000GB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**注意:** *在 MongoDB 中，集合只有在内容插入后才会创建! 就是说，创建集合(数据表)后要再插入一个文档(记录)，集合才会真正创建。*</span><br><span class="line"></span><br><span class="line">## 删除数据库和集合</span><br><span class="line"></span><br><span class="line">### 删除数据库</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>1.切换到db下:&gt;use dbname<br>2.db.dropDatabase()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 删除集合</span><br><span class="line"></span><br><span class="line">基本语法为:</span><br></pre></td></tr></table></figure></p>
+<p>db.collection.drop()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">实际操作:</span><br></pre></td></tr></table></figure></p>
+<p>1.&gt;use dbname<br>2.&gt;show tables<br>after this there will show tablenames(collectionname)<br>3.&gt;db.tablename.drop()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 创建集合</span><br><span class="line"></span><br><span class="line">MongoDB 中使用 **createCollection()** 方法来创建集合。</span><br><span class="line"></span><br><span class="line">语法格式：</span><br></pre></td></tr></table></figure></p>
+<p>db.createCollection(name, options)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">参数说明：</span><br><span class="line"></span><br><span class="line">- name: 要创建的集合名称</span><br><span class="line">- options: 可选参数, 指定有关内存大小及索引的选项</span><br><span class="line"></span><br><span class="line">options 可以是如下参数：</span><br><span class="line"></span><br><span class="line">| 字段        | 类型 | 描述                                                         |</span><br><span class="line">| ----------- | ---- | ------------------------------------------------------------ |</span><br><span class="line">| capped      | 布尔 | （可选）如果为 true，则创建固定集合。固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档。 **当该值为 true 时，必须指定 size 参数。** |</span><br><span class="line">| autoIndexId | 布尔 | （可选）如为 true，自动在 _id 字段创建索引。默认为 false。   |</span><br><span class="line">| size        | 数值 | （可选）为固定集合指定一个最大值（以字节计）。 **如果 capped 为 true，也需要指定该字段。** |</span><br><span class="line">| max         | 数值 | （可选）指定固定集合中包含文档的最大数量。                   |</span><br><span class="line"></span><br><span class="line">在插入文档时，MongoDB 首先检查固定集合的 size 字段，然后检查 max 字段。</span><br><span class="line"></span><br><span class="line">创建固定集合 mycol，整个集合空间大小 6142800 KB, 文档最大个数为 10000 个。</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>db.createCollection(“mycol”, { capped : true, autoIndexId : true, size :<br>   6142800, max : 10000 } )<br>{ “ok” : 1 }</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">在 MongoDB 中，你不需要创建集合。当你插入一些文档时，MongoDB 会自动创建集合。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>db.mycol2.insert({“name” : “菜鸟教程”})<br>show collections<br>mycol2<br>…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 插入文档</span><br><span class="line"></span><br><span class="line">MongoDB 使用 insert() 或 save() 方法向集合中插入文档，语法如下：</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>db.COLLECTION_NAME.insert(document)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">实例</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>use test<br>switched to db test<br>db.col.insert({title:’教程’,})<br>WriteResult({ “nInserted” : 1 })<br>db.col.insert({title:’教程’,desc:’Mongodb is a nosql’,by:’sanjin’})<br>WriteResult({ “nInserted” : 1 })<br>db.col.find()<br>{ “_id” : ObjectId(“5c385b537337b5560d874451”), “title” : “教程” }<br>{ “_id” : ObjectId(“5c385b7d7337b5560d874452”), “title” : “教程”, “desc” : “Mongodb is a nosql”, “by” : “sanjin” }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;从上面的内容可以看出,文档中可以有多个集合,集合内的内容可以不同,集合中可以为任何 内容的整合,例如:</span><br><span class="line">&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>document=({title: ‘MongoDB 教程’,<br>   description: ‘MongoDB 是一个 Nosql 数据库’,<br>   by: ‘菜鸟教程’,<br>   url: ‘<a href="http://www.runoob.com&#39;" target="_blank" rel="noopener">http://www.runoob.com&#39;</a>,<br>   tags: [‘mongodb’, ‘database’, ‘NoSQL’],<br>   likes: 100<br>});<br>在直接插入也可以:</p>
+<blockquote>
+<p>db.col.insert(document)<br>WriteResult({ “nInserted” : 1 })<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.2 版本后还有以下几种语法可用于插入文档:</span><br><span class="line"></span><br><span class="line">-  db.collection.insertOne():向指定集合中插入一条文档数据</span><br><span class="line">-  db.collection.insertMany():向指定集合中插入多条文档数据,这个里面的参数可以将多个集合放到一个list中,用于多条文档数据的插入</span><br><span class="line"></span><br><span class="line">## mongodb更新文档,用来更新集合中的文档</span><br><span class="line"></span><br><span class="line">## update() 方法</span><br><span class="line"></span><br><span class="line">update() 方法用于更新已存在的文档。语法格式如下：</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+<p>db.collection.update(<br>   <query>,<br>   <update>,<br>   {<br>     upsert: <boolean>,<br>     multi: <boolean>,<br>     writeConcern: <document><br>   }<br>)<br>参数说明：</document></boolean></boolean></update></query></p>
+<p>query : update的查询条件，类似sql update查询内where后面的。<br>update : update的对象和一些更新的操作符（如$,$inc…）等，也可以理解为sql update查询内set后面的<br>upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。<br>multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。<br>writeConcern :可选，抛出异常的级别。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>db.col.update({‘title’:’MongoDB 教程’},{$set:{‘title’:’MongoDB’}})<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">以上语句只会修改第一条发现的文档，如果你要修改多条相同的文档，则需要设置 multi 参数为 true。</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>db.col.update({‘title’:’MongoDB 教程’},{$set:{‘title’:’MongoDB’}},{multi:true})<br><code>`</code></p>
+</blockquote>
+<p>只更新第一条记录：</p>
+<p>db.col.update( { “count” : { $gt : 1 } } , { ​$set : { “test2” : “OK”} } );</p>
+<p>全部更新：</p>
+<p>db.col.update( { “count” : { $gt : 3 } } , { ​$set : { “test2” : “OK”} },false,true );</p>
+<p>只添加第一条：</p>
+<p>db.col.update( { “count” : { $gt : 4 } } , { ​$set : { “test5” : “OK”} },true,false );</p>
+<p>全部添加进去:</p>
+<p>db.col.update( { “count” : { $gt : 5 } } , { $set : { “test5” : “OK”} },true,true );</p>
+<p>全部更新：</p>
+<p>db.col.update( { “count” : { $gt : 15 } } , { $inc : { “count” : 1} },false,true );</p>
+<p>只更新第一条记录：</p>
+<p>db.col.update( { “count” : { $gt : 10 } } , { ​$inc : { “count” : 1} },false,false );</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb/" rel="tag"># -mongodb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/08/pymongo的使用/" rel="next" title="pymongo的使用">
+                <i class="fa fa-chevron-left"></i> pymongo的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">三金酱</p>
+              <div class="site-description motion-element" itemprop="description">Just For Study</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongodb的基本使用"><span class="nav-number">1.</span> <span class="nav-text">Mongodb的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB的基本理解"><span class="nav-number">1.1.</span> <span class="nav-text">MongoDB的基本理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">1.1.1.</span> <span class="nav-text">数据库</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">三金酱</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2019/05/08/Mongodb基本使用/";
+    this.page.identifier = "2019/05/08/Mongodb基本使用/";
+    this.page.title = 'Mongodb的基本使用';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
