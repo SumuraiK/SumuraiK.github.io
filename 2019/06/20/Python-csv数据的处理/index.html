@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zn-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="12345title: Python--csv数据的处理date: 2019-06-19 23:46:02tags:   -数据处理categories: &amp;quot;python&amp;quot;  前言:课设使用爬虫爬了120多条数据其中有的数据的票房和评论人数是以亿和万作为单位  将爬取出来的数据由json对象转换到csv文件主要是这个网站上,一般的例子都有 https://python3-coo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sumurai">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/Python-csv数据的处理/index.html">
+<meta property="og:site_name" content="Sumurai">
+<meta property="og:description" content="12345title: Python--csv数据的处理date: 2019-06-19 23:46:02tags:   -数据处理categories: &amp;quot;python&amp;quot;  前言:课设使用爬虫爬了120多条数据其中有的数据的票房和评论人数是以亿和万作为单位  将爬取出来的数据由json对象转换到csv文件主要是这个网站上,一般的例子都有 https://python3-coo">
+<meta property="og:locale" content="zn-Hans">
+<meta property="og:updated_time" content="2019-06-21T07:42:52.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sumurai">
+<meta name="twitter:description" content="12345title: Python--csv数据的处理date: 2019-06-19 23:46:02tags:   -数据处理categories: &amp;quot;python&amp;quot;  前言:课设使用爬虫爬了120多条数据其中有的数据的票房和评论人数是以亿和万作为单位  将爬取出来的数据由json对象转换到csv文件主要是这个网站上,一般的例子都有 https://python3-coo">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/06/20/Python-csv数据的处理/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Sumurai</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zn-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sumurai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">头铁就完事儿</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/Python-csv数据的处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="三金酱">
+      <meta itemprop="description" content="Just For Study">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sumurai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-20 14:50:25" itemprop="dateCreated datePublished" datetime="2019-06-20T14:50:25+08:00">2019-06-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-21 15:42:52" itemprop="dateModified" datetime="2019-06-21T15:42:52+08:00">2019-06-21</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/20/Python-csv数据的处理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/20/Python-csv数据的处理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: Python--csv数据的处理</span><br><span class="line">date: 2019-06-19 23:46:02</span><br><span class="line">tags: </span><br><span class="line">  -数据处理</span><br><span class="line">categories: &quot;python&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>前言:课设使用爬虫爬了120多条数据其中有的数据的票房和评论人数是以亿和万作为单位</p>
+</blockquote>
+<h2 id="将爬取出来的数据由json对象转换到csv文件"><a href="#将爬取出来的数据由json对象转换到csv文件" class="headerlink" title="将爬取出来的数据由json对象转换到csv文件"></a>将爬取出来的数据由json对象转换到csv文件</h2><p>主要是这个网站上,一般的例子都有</p>
+<p><code>https://python3-cookbook.readthedocs.io/zh_CN/latest/c06/p01_read_write_csv_data.html</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">爬取出来的数据格式:</span><br><span class="line">&#123;&apos;name&apos;: &apos;复仇者联盟3：无限战争&apos;, &apos;type&apos;: &apos;动作,冒险,科幻&apos;, &apos;country&apos;: &apos;美国&apos;, &apos;length&apos;: &apos;149分钟&apos;, &apos;release-time&apos;: &apos;2018-05-11&apos;, &apos;score&apos;: &apos;9.0&apos;, &apos;score-num&apos;: &apos;167.1万&apos;, &apos;box-office&apos;: &apos;23.91亿&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;遇见你真好&apos;, &apos;type&apos;: &apos;剧情,喜剧,爱情&apos;, &apos;country&apos;: &apos;中国大陆&apos;, &apos;length&apos;: &apos;99分钟&apos;, &apos;release-time&apos;: &apos;2018-03-29&apos;, &apos;score&apos;: &apos;8.1&apos;, &apos;score-num&apos;: &apos;58047&apos;, &apos;box-office&apos;: &apos;5101万&apos;&#125;</span><br><span class="line">&#123;&apos;name&apos;: &apos;孟买酒店&apos;, &apos;type&apos;: &apos;剧情&apos;, &apos;country&apos;: &apos;澳大利亚&apos;, &apos;length&apos;: &apos;125分钟&apos;, &apos;release-time&apos;: &apos;2018-09-07&apos;, &apos;score&apos;: &apos;7.9&apos;, &apos;score-num&apos;: &apos;55&apos;, &apos;box-office&apos;: &apos;965万美元&apos;&#125;</span><br><span class="line">想要变成:</span><br><span class="line">name,type,country,length,release-time,score,score-num,box-office</span><br><span class="line">复仇者联盟3：无限战争,&quot;动作,冒险,科幻&quot;,美国,149分钟,2018-05-11,9.0,167.1万,23.91亿</span><br><span class="line">遇见你真好,&quot;剧情,喜剧,爱情&quot;,中国大陆,99分钟,2018-03-29,8.1,58047,5101万</span><br><span class="line">孟买酒店,剧情,澳大利亚,125分钟,2018-09-07,7.9,55,965万美元</span><br><span class="line">后来的我们,&quot;剧情,爱情&quot;,&quot;中国大陆,中国台湾&quot;,119分钟,2018-04-28,8.3,133.4万,13.62亿</span><br></pre></td></tr></table></figure>
+<p>所需要的代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line">headers = [<span class="string">'name'</span>, <span class="string">'type'</span>, <span class="string">'country'</span>, <span class="string">'length'</span>, <span class="string">'release-time'</span>, <span class="string">'score'</span>, <span class="string">'score-num'</span>, <span class="string">'box-office'</span>]</span><br><span class="line">rows = [</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'复仇者联盟3：无限战争'</span>, <span class="string">'type'</span>: <span class="string">'动作,冒险,科幻'</span>, <span class="string">'country'</span>: <span class="string">'美国'</span>, <span class="string">'length'</span>: <span class="string">'149分钟'</span>, <span class="string">'release-time'</span>: <span class="string">'2018-05-11'</span>, <span class="string">'score'</span>: <span class="string">'9.0'</span>, <span class="string">'score-num'</span>: <span class="string">'167.1万'</span>, <span class="string">'box-office'</span>: <span class="string">'23.91亿'</span>&#125;,</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'遇见你真好'</span>, <span class="string">'type'</span>: <span class="string">'剧情,喜剧,爱情'</span>, <span class="string">'country'</span>: <span class="string">'中国大陆'</span>, <span class="string">'length'</span>: <span class="string">'99分钟'</span>, <span class="string">'release-time'</span>: <span class="string">'2018-03-29'</span>, <span class="string">'score'</span>: <span class="string">'8.1'</span>, <span class="string">'score-num'</span>: <span class="string">'58047'</span>, <span class="string">'box-office'</span>: <span class="string">'5101万'</span>&#125;,</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'孟买酒店'</span>, <span class="string">'type'</span>: <span class="string">'剧情'</span>, <span class="string">'country'</span>: <span class="string">'澳大利亚'</span>, <span class="string">'length'</span>: <span class="string">'125分钟'</span>, <span class="string">'release-time'</span>: <span class="string">'2018-09-07'</span>, <span class="string">'score'</span>: <span class="string">'7.9'</span>, <span class="string">'score-num'</span>: <span class="string">'55'</span>, <span class="string">'box-office'</span>: <span class="string">'965万美元'</span>&#125;</span><br><span class="line">]<span class="comment">#//这里是一个对象的列表</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'movie2.csv'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.DictWriter(f, headers)</span><br><span class="line">    f_csv.writeheader()</span><br><span class="line">    f_csv.writerows(rows)</span><br></pre></td></tr></table></figure>
+<h3 id="将数据进行修改-单独修改列"><a href="#将数据进行修改-单独修改列" class="headerlink" title="将数据进行修改,单独修改列"></a>将数据进行修改,单独修改列</h3><p>可以看到上面的评论人数的单位是万,不易于下面的数据处理</p>
+<p>先将csv文件中的列进行单独处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'movie2.csv'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> csvfile:</span><br><span class="line">    reader = csv.reader(csvfile)</span><br><span class="line">    column = [row[<span class="number">6</span>] <span class="keyword">for</span> row <span class="keyword">in</span> reader]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(column)):</span><br><span class="line">      <span class="comment">#如果要进行对票房的处理,将其的亿,万美元.万分别进行处理,if..elif..elif</span></span><br><span class="line">        <span class="keyword">if</span> column[i][<span class="number">-1</span>:] == <span class="string">'万'</span>:</span><br><span class="line">            column[i] = re.sub(<span class="string">"\D"</span>, <span class="string">""</span>, column[i])+<span class="string">'00000'</span></span><br><span class="line">print(column)</span><br></pre></td></tr></table></figure>
+<p>接下来的操作是在shell里面进行的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将csv利用pandas进行处理成DataForm的格式</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">movie = pd.read_csv(<span class="string">'/Users/xinghai/Desktop/movie4.csv'</span>);</span><br><span class="line"><span class="comment">#删掉你要改的那一列</span></span><br><span class="line">movie.drop(columns=[<span class="string">'score-num'</span>])</span><br><span class="line"><span class="comment">#添加处理后的那一列的数据</span></span><br><span class="line">movie[<span class="string">'score-num'</span>] = [....]</span><br></pre></td></tr></table></figure>
+<h2 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h2><p><code>https://echarts.baidu.com/builder.html</code></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/27/Git的基本使用/" rel="next" title="Git的基本使用">
+                <i class="fa fa-chevron-left"></i> Git的基本使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">三金酱</p>
+              <div class="site-description motion-element" itemprop="description">Just For Study</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#将爬取出来的数据由json对象转换到csv文件"><span class="nav-number">1.</span> <span class="nav-text">将爬取出来的数据由json对象转换到csv文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将数据进行修改-单独修改列"><span class="nav-number">1.1.</span> <span class="nav-text">将数据进行修改,单独修改列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像处理"><span class="nav-number">2.</span> <span class="nav-text">图像处理</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">三金酱</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2019/06/20/Python-csv数据的处理/";
+    this.page.identifier = "2019/06/20/Python-csv数据的处理/";
+    this.page.title = '';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
