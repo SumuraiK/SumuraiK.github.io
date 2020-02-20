@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 我的mongodb在123456789101112131415161718192021222324**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo*** 如果想要关掉mongod">
+  <meta name="description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 我的mongodb在 /usr/local/Cellar/mongodb/4.0.4_1/bin/ cd到这个里面 **一定要先12345678910111213141516171819202122* 如果想要关掉mongod">
 <meta name="keywords" content="mongodb">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MongoDB的基本使用">
-<meta property="og:url" content="http://yoursite.com/2020/02/20/MongoDB的基本使用/index.html">
+<meta property="og:title" content="Mongodb的基本使用">
+<meta property="og:url" content="http://yoursite.com/2020/02/20/Mongodb的基本使用/index.html">
 <meta property="og:site_name" content="Sumurai">
-<meta property="og:description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 我的mongodb在123456789101112131415161718192021222324**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo*** 如果想要关掉mongod">
+<meta property="og:description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 我的mongodb在 /usr/local/Cellar/mongodb/4.0.4_1/bin/ cd到这个里面 **一定要先12345678910111213141516171819202122* 如果想要关掉mongod">
 <meta property="og:locale" content="zn-Hans">
-<meta property="og:updated_time" content="2020-02-20T13:23:12.732Z">
+<meta property="og:updated_time" content="2020-02-20T13:33:41.861Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MongoDB的基本使用">
-<meta name="twitter:description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 我的mongodb在123456789101112131415161718192021222324**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo*** 如果想要关掉mongod">
+<meta name="twitter:title" content="Mongodb的基本使用">
+<meta name="twitter:description" content="Mongodb的基本使用主要的详解在http://www.runoob.com/mongodb/mongodb-dropdatabase.html 本笔记就是记最基本的使用 我的mongodb在 /usr/local/Cellar/mongodb/4.0.4_1/bin/ cd到这个里面 **一定要先12345678910111213141516171819202122* 如果想要关掉mongod">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/02/20/MongoDB的基本使用/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/20/Mongodb的基本使用/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>MongoDB的基本使用 | Sumurai</title>
+  <title>Mongodb的基本使用 | Sumurai</title>
   
 
 
@@ -328,7 +328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/MongoDB的基本使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/20/Mongodb的基本使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="三金酱">
@@ -345,7 +345,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MongoDB的基本使用
+          <h1 class="post-title" itemprop="name headline">Mongodb的基本使用
 
               
             
@@ -371,7 +371,7 @@
                 
               
 
-              <time title="Created: 2020-02-20 21:19:09 / Modified: 21:23:12" itemprop="dateCreated datePublished" datetime="2020-02-20T21:19:09+08:00">2020-02-20</time>
+              <time title="Created: 2020-02-20 21:31:58 / Modified: 21:33:41" itemprop="dateCreated datePublished" datetime="2020-02-20T21:31:58+08:00">2020-02-20</time>
             
 
             
@@ -412,8 +412,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2020/02/20/MongoDB的基本使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/20/MongoDB的基本使用/" itemprop="commentCount"></span>
+                <a href="/2020/02/20/Mongodb的基本使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/20/Mongodb的基本使用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -443,46 +443,71 @@
       
         <h1 id="Mongodb的基本使用"><a href="#Mongodb的基本使用" class="headerlink" title="Mongodb的基本使用"></a>Mongodb的基本使用</h1><p>主要的详解在<a href="http://www.runoob.com/mongodb/mongodb-dropdatabase.html" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-dropdatabase.html</a></p>
 <p>本笔记就是记最基本的使用</p>
-<p>我的mongodb在<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**一定要先```./mongod```然后才再用```./mongo```在终端启动mongo**</span><br><span class="line"></span><br><span class="line">* 如果想要关掉mongod的话可以直接按Q离开,也可以**top**查看相关的进程,然后**kill pid**</span><br><span class="line"></span><br><span class="line">## MongoDB的基本理解</span><br><span class="line"></span><br><span class="line">| SQL术语/概念 | MongoDB术语/概念 | 解释/说明                           |</span><br><span class="line">| ------------ | ---------------- | ----------------------------------- |</span><br><span class="line">| database     | database         | 数据库                              |</span><br><span class="line">| table        | collection       | 数据库表/集合                       |</span><br><span class="line">| row          | document         | 数据记录行/文档                     |</span><br><span class="line">| column       | field            | 数据字段/域                         |</span><br><span class="line">| index        | index            | 索引                                |</span><br><span class="line">| table joins  |                  | 表连接,MongoDB不支持                |</span><br><span class="line">| primary key  | primary key      | 主键,MongoDB自动将_id字段设置为主键 |</span><br><span class="line"></span><br><span class="line">通过下图实例，我们也可以更直观的了解Mongo中的一些概念：</span><br><span class="line"></span><br><span class="line">![img](http://www.runoob.com/wp-content/uploads/2013/10/Figure-1-Mapping-Table-to-Collection-1.png)</span><br><span class="line"></span><br><span class="line">### 数据库</span><br><span class="line"></span><br><span class="line">一个MongoDB可以有多个数据库</span><br></pre></td></tr></table></figure></p>
+<p>我的mongodb在</p>
+<p>/usr/local/Cellar/mongodb/4.0.4_1/bin/</p>
+<p>cd到这个里面</p>
+<p>**一定要先<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 如果想要关掉mongod的话可以直接按Q离开,也可以**top**查看相关的进程,然后**kill pid**</span><br><span class="line"></span><br><span class="line">## MongoDB的基本理解</span><br><span class="line"></span><br><span class="line">| SQL术语/概念 | MongoDB术语/概念 | 解释/说明                           |</span><br><span class="line">| ------------ | ---------------- | ----------------------------------- |</span><br><span class="line">| database     | database         | 数据库                              |</span><br><span class="line">| table        | collection       | 数据库表/集合                       |</span><br><span class="line">| row          | document         | 数据记录行/文档                     |</span><br><span class="line">| column       | field            | 数据字段/域                         |</span><br><span class="line">| index        | index            | 索引                                |</span><br><span class="line">| table joins  |                  | 表连接,MongoDB不支持                |</span><br><span class="line">| primary key  | primary key      | 主键,MongoDB自动将_id字段设置为主键 |</span><br><span class="line"></span><br><span class="line">通过下图实例，我们也可以更直观的了解Mongo中的一些概念：</span><br><span class="line"></span><br><span class="line">![img](http://www.runoob.com/wp-content/uploads/2013/10/Figure-1-Mapping-Table-to-Collection-1.png)</span><br><span class="line"></span><br><span class="line">### 数据库</span><br><span class="line"></span><br><span class="line">一个MongoDB可以有多个数据库</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>db<br>text<br>show dbs<br>admin   0.000GB<br>config  0.000GB<br>local   0.000GB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">用**use dbname**来使用指定的数据库</span><br><span class="line"></span><br><span class="line">**数据库名要全部小写哇**</span><br><span class="line"></span><br><span class="line">### 文档</span><br><span class="line"></span><br><span class="line">文档是一组键值(key-value)对(即BSON)。MongoDB 的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别，也是 MongoDB 非常突出的特点。</span><br><span class="line"></span><br><span class="line">| RDBMS  | MongoDB                           |</span><br><span class="line">| ------ | --------------------------------- |</span><br><span class="line">| 数据库 | 数据库                            |</span><br><span class="line">| 表格   | 集合                              |</span><br><span class="line">| 行     | 文档                              |</span><br><span class="line">| 列     | 字段                              |</span><br><span class="line">| 表联合 | 嵌入文档                          |</span><br><span class="line">| 主键   | 主键 (MongoDB 提供了 key 为 _id ) |</span><br><span class="line"></span><br><span class="line">集合就是mongodb的文档组,集合里面存的是键值对</span><br><span class="line"></span><br><span class="line">## Mongodb 创建数据库</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<blockquote>
+<p>db<br>text<br>show dbs<br>admin   0.000GB<br>config  0.000GB<br>local   0.000GB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">用**use dbname**来使用指定的数据库</span><br><span class="line"></span><br><span class="line">**数据库名要全部小写**</span><br><span class="line"></span><br><span class="line">### 文档</span><br><span class="line"></span><br><span class="line">文档是一组键值(key-value)对(即BSON)。MongoDB 的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型，这与关系型数据库有很大的区别，也是 MongoDB 非常突出的特点。</span><br><span class="line"></span><br><span class="line">| RDBMS  | MongoDB                           |</span><br><span class="line">| ------ | --------------------------------- |</span><br><span class="line">| 数据库 | 数据库                            |</span><br><span class="line">| 表格   | 集合                              |</span><br><span class="line">| 行     | 文档                              |</span><br><span class="line">| 列     | 字段                              |</span><br><span class="line">| 表联合 | 嵌入文档                          |</span><br><span class="line">| 主键   | 主键 (MongoDB 提供了 key 为 _id ) |</span><br><span class="line"></span><br><span class="line">集合就是mongodb的文档组,集合里面存的是键值对</span><br><span class="line"></span><br><span class="line">## Mongodb 创建数据库</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
 <blockquote>
 <p>use tablename<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 如果数据库存在则转移到当前数据库,如果不存在那么就自动新建一个数据库</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
 <blockquote>
 <p>show dbs<br>admin   0.000GB<br>config  0.000GB<br>local   0.000GB<br>上面三个数据库是系统自带的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 会发现刚才新建的数据库不在里面,要插入数据会在里面显示</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
 <blockquote>
 <p>db.text.insert({“name”:”珍珍”,”age”:”18”,”sex”:”female”})<br>WriteResult({ “nInserted” : 1 })<br>show dbs<br>admin   0.000GB<br>config  0.000GB<br>local   0.000GB<br>text    0.000GB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**注意:** *在 MongoDB 中，集合只有在内容插入后才会创建! 就是说，创建集合(数据表)后要再插入一个文档(记录)，集合才会真正创建。*</span><br><span class="line"></span><br><span class="line">## 删除数据库和集合</span><br><span class="line"></span><br><span class="line">### 删除数据库</span><br></pre></td></tr></table></figure></p>
 </blockquote>
+</blockquote>
+</blockquote>
 <p>1.切换到db下:&gt;use dbname<br>2.db.dropDatabase()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 删除集合</span><br><span class="line"></span><br><span class="line">基本语法为:</span><br></pre></td></tr></table></figure></p>
 <p>db.collection.drop()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">实际操作:</span><br></pre></td></tr></table></figure></p>
-<p>1.&gt;use dbname<br>2.&gt;show tables<br>after this there will show tablenames(collectionname)<br>3.&gt;db.tablename.drop()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 创建集合</span><br><span class="line"></span><br><span class="line">MongoDB 中使用 **createCollection()** 方法来创建集合。</span><br><span class="line"></span><br><span class="line">语法格式：</span><br></pre></td></tr></table></figure></p>
+<p>1.&gt;&gt;&gt; use dbname<br>2.&gt;&gt;&gt; show tables<br>after this there will show tablenames(collectionname)<br>3.&gt;&gt;&gt; db.tablename.drop()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 创建集合</span><br><span class="line"></span><br><span class="line">MongoDB 中使用 **createCollection()** 方法来创建集合。</span><br><span class="line"></span><br><span class="line">语法格式：</span><br></pre></td></tr></table></figure></p>
 <p>db.createCollection(name, options)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">参数说明：</span><br><span class="line"></span><br><span class="line">- name: 要创建的集合名称</span><br><span class="line">- options: 可选参数, 指定有关内存大小及索引的选项</span><br><span class="line"></span><br><span class="line">options 可以是如下参数：</span><br><span class="line"></span><br><span class="line">| 字段        | 类型 | 描述                                                         |</span><br><span class="line">| ----------- | ---- | ------------------------------------------------------------ |</span><br><span class="line">| capped      | 布尔 | （可选）如果为 true，则创建固定集合。固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档。 **当该值为 true 时，必须指定 size 参数。** |</span><br><span class="line">| autoIndexId | 布尔 | （可选）如为 true，自动在 _id 字段创建索引。默认为 false。   |</span><br><span class="line">| size        | 数值 | （可选）为固定集合指定一个最大值（以字节计）。 **如果 capped 为 true，也需要指定该字段。** |</span><br><span class="line">| max         | 数值 | （可选）指定固定集合中包含文档的最大数量。                   |</span><br><span class="line"></span><br><span class="line">在插入文档时，MongoDB 首先检查固定集合的 size 字段，然后检查 max 字段。</span><br><span class="line"></span><br><span class="line">创建固定集合 mycol，整个集合空间大小 6142800 KB, 文档最大个数为 10000 个。</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>db.createCollection(“mycol”, { capped : true, autoIndexId : true, size :<br>   6142800, max : 10000 } )<br>{ “ok” : 1 }</p>
+<blockquote>
+<blockquote>
+<p>db.createCollection(“mycol”, { capped : true, autoIndexId : true, size :<br>   6142800, max : 10000 } )<br>{ “ok” : 1 }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">在 MongoDB 中，你不需要创建集合。当你插入一些文档时，MongoDB 会自动创建集合。</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">在 MongoDB 中，你不需要创建集合。当你插入一些文档时，MongoDB 会自动创建集合。</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
 <blockquote>
 <p>db.mycol2.insert({“name” : “菜鸟教程”})<br>show collections<br>mycol2<br>…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 插入文档</span><br><span class="line"></span><br><span class="line">MongoDB 使用 insert() 或 save() 方法向集合中插入文档，语法如下：</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<p>db.COLLECTION_NAME.insert(document)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">实例</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>use test<br>switched to db test<br>db.col.insert({title:’教程’,})<br>WriteResult({ “nInserted” : 1 })<br>db.col.insert({title:’教程’,desc:’Mongodb is a nosql’,by:’sanjin’})<br>WriteResult({ “nInserted” : 1 })<br>db.col.find()<br>{ “_id” : ObjectId(“5c385b537337b5560d874451”), “title” : “教程” }<br>{ “_id” : ObjectId(“5c385b7d7337b5560d874452”), “title” : “教程”, “desc” : “Mongodb is a nosql”, “by” : “sanjin” }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;从上面的内容可以看出,文档中可以有多个集合,集合内的内容可以不同,集合中可以为任何 内容的整合,例如:</span><br><span class="line">&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>document=({title: ‘MongoDB 教程’,<br>description: ‘MongoDB 是一个 Nosql 数据库’,<br>by: ‘菜鸟教程’,<br>url: ‘<a href="http://www.runoob.com&#39;" target="_blank" rel="noopener">http://www.runoob.com&#39;</a>,<br>tags: [‘mongodb’, ‘database’, ‘NoSQL’],<br>likes: 100<br>});<br>在直接插入也可以:</p>
-<blockquote>
-<p>db.col.insert(document)<br>WriteResult({ “nInserted” : 1 })<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3.2 版本后还有以下几种语法可用于插入文档:</span><br><span class="line"></span><br><span class="line">-  db.collection.insertOne():向指定集合中插入一条文档数据</span><br><span class="line">-  db.collection.insertMany():向指定集合中插入多条文档数据,这个里面的参数可以将多个集合放到一个list中,用于多条文档数据的插入</span><br><span class="line"></span><br><span class="line">## mongodb更新文档,用来更新集合中的文档</span><br><span class="line"></span><br><span class="line">## update() 方法</span><br><span class="line"></span><br><span class="line">update() 方法用于更新已存在的文档。语法格式如下：</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 </blockquote>
-<p>db.collection.update(<br>   <query>,<br>   <update>,<br>   {<br>     upsert: <boolean>,<br>     multi: <boolean>,<br>     writeConcern: <document><br>   }<br>)<br>参数说明：</document></boolean></boolean></update></query></p>
-<p>query : update的查询条件，类似sql update查询内where后面的。<br>update : update的对象和一些更新的操作符（如$,$inc…）等，也可以理解为sql update查询内set后面的<br>upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。<br>multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。<br>writeConcern :可选，抛出异常的级别。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>db.col.update({‘title’:’MongoDB 教程’},{$set:{‘title’:’MongoDB’}})<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">以上语句只会修改第一条发现的文档，如果你要修改多条相同的文档，则需要设置 multi 参数为 true。</span><br></pre></td></tr></table></figure></p>
+<p>db.COLLECTION_NAME.insert(document)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">实例</span><br><span class="line"></span><br><span class="line">```tex</span><br><span class="line">&gt; use test</span><br><span class="line">switched to db test</span><br><span class="line">&gt; db.col.insert(&#123;title:&apos;教程&apos;,&#125;)</span><br><span class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</span><br><span class="line">&gt; db.col.insert(&#123;title:&apos;教程&apos;,desc:&apos;Mongodb is a nosql&apos;,by:&apos;sanjin&apos;&#125;)</span><br><span class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</span><br><span class="line">&gt; db.col.find()</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5c385b537337b5560d874451&quot;), &quot;title&quot; : &quot;教程&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5c385b7d7337b5560d874452&quot;), &quot;title&quot; : &quot;教程&quot;, &quot;desc&quot; : &quot;Mongodb is a nosql&quot;, &quot;by&quot; : &quot;sanjin&quot; &#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>db.col.update({‘title’:’MongoDB 教程’},{$set:{‘title’:’MongoDB’}},{multi:true})<br><code>`</code></p>
+<p>从上面的内容可以看出,文档中可以有多个集合,集合内的内容可以不同,集合中可以为任何 内容的整合,例如:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;document=(&#123;title: 'MongoDB 教程', </span><br><span class="line">&gt;description: 'MongoDB 是一个 Nosql 数据库',</span><br><span class="line">&gt;by: '菜鸟教程',</span><br><span class="line">&gt;url: 'http://www.runoob.com',</span><br><span class="line">&gt;tags: ['mongodb', 'database', 'NoSQL'],</span><br><span class="line">&gt;likes: 100</span><br><span class="line">&gt;&#125;);</span><br><span class="line">&gt;在直接插入也可以:</span><br><span class="line">&gt;&gt; db.col.insert(document)</span><br><span class="line">&gt;WriteResult(&#123; "nInserted" : 1 &#125;)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
+<p>3.2 版本后还有以下几种语法可用于插入文档:</p>
+<ul>
+<li>db.collection.insertOne():向指定集合中插入一条文档数据</li>
+<li>db.collection.insertMany():向指定集合中插入多条文档数据,这个里面的参数可以将多个集合放到一个list中,用于多条文档数据的插入</li>
+</ul>
+<h2 id="mongodb更新文档-用来更新集合中的文档"><a href="#mongodb更新文档-用来更新集合中的文档" class="headerlink" title="mongodb更新文档,用来更新集合中的文档"></a>mongodb更新文档,用来更新集合中的文档</h2><h2 id="update-方法"><a href="#update-方法" class="headerlink" title="update() 方法"></a>update() 方法</h2><p>update() 方法用于更新已存在的文档。语法格式如下：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">db.collection.update(</span><br><span class="line">   &lt;query&gt;,</span><br><span class="line">   &lt;update&gt;,</span><br><span class="line">   &#123;</span><br><span class="line">     upsert: &lt;boolean&gt;,</span><br><span class="line">     multi: &lt;boolean&gt;,</span><br><span class="line">     writeConcern: &lt;document&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br><span class="line">参数说明：</span><br><span class="line"></span><br><span class="line">query : update的查询条件，类似sql update查询内where后面的。</span><br><span class="line">update : update的对象和一些更新的操作符（如<span class="formula">$,$</span>inc...）等，也可以理解为sql update查询内set后面的</span><br><span class="line">upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。</span><br><span class="line">multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。</span><br><span class="line">writeConcern :可选，抛出异常的级别。</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.col.update(&#123;'title':'MongoDB 教程'&#125;,&#123;<span class="formula">$set:&#123;'title':'MongoDB'&#125;&#125;)</span></span><br></pre></td></tr></table></figure>
+<p>以上语句只会修改第一条发现的文档，如果你要修改多条相同的文档，则需要设置 multi 参数为 true。</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;db.col.update(&#123;'title':'MongoDB 教程'&#125;,&#123;<span class="formula">$set:&#123;'title':'MongoDB'&#125;&#125;,&#123;multi:true&#125;)</span></span><br></pre></td></tr></table></figure>
 <p>只更新第一条记录：</p>
 <p>db.col.update( { “count” : { $gt : 1 } } , { $set : { “test2” : “OK”} } );</p>
 <p>全部更新：</p>
@@ -713,7 +738,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongodb的基本使用"><span class="nav-number">1.</span> <span class="nav-text">Mongodb的基本使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mongodb的基本使用"><span class="nav-number">1.</span> <span class="nav-text">Mongodb的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb更新文档-用来更新集合中的文档"><span class="nav-number">1.1.</span> <span class="nav-text">mongodb更新文档,用来更新集合中的文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update-方法"><span class="nav-number">1.2.</span> <span class="nav-text">update() 方法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -877,9 +902,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://yoursite.com/2020/02/20/MongoDB的基本使用/";
-    this.page.identifier = "2020/02/20/MongoDB的基本使用/";
-    this.page.title = 'MongoDB的基本使用';
+    this.page.url = "http://yoursite.com/2020/02/20/Mongodb的基本使用/";
+    this.page.identifier = "2020/02/20/Mongodb的基本使用/";
+    this.page.title = 'Mongodb的基本使用';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
